@@ -14,7 +14,6 @@ Preload.prototype = {
     this.load.setPreloadSprite(this.asset);
     this.load.image('map', 'assets/map.png');
     this.load.image('unit', 'assets/unit1.png');
-    this.unit = this.add.sprite(40, 40, 'unit');
 
   },
   create: function() {

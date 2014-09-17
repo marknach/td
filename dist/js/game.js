@@ -96,12 +96,15 @@ module.exports = Menu;
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
       this.unit = this.game.add.sprite(0, 435, 'unit');
-      this.tween = this.game.add.tween(this.unit).to({x: 695}, 1000)
-                                                 .to({y: 100}, 1000)
-                                                 .start();
+      this.walkPath(this.unit);
     },
     update: function() {
 
+    },
+    walkPath: function(obj) {
+      this.tween = this.game.add.tween(this.unit).to({x: 695}, 1000)
+                                                 .to({y: 100}, 1000)
+                                                 .start();
     }
   };
   
@@ -124,7 +127,6 @@ Preload.prototype = {
     this.load.setPreloadSprite(this.asset);
     this.load.image('map', 'assets/map.png');
     this.load.image('unit', 'assets/unit1.png');
-    this.unit = this.add.sprite(40, 40, 'unit');
 
   },
   create: function() {
