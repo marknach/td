@@ -3,11 +3,11 @@
   function Play() {}
   Play.prototype = {
     create: function() {
-      this.lastFire = 0;
+      this.player = new Player();
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
       this.towers = this.game.add.group();
-      this.towers.add( new Tower(this.game, 500, 300));
+      this.player.addTower(new Tower(this.game, 500, 300));
       this.spawnLevel();
     },
     update: function() {

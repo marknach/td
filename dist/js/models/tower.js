@@ -1,8 +1,8 @@
 function Tower(game, x, y) {
-  return game.add.sprite(x, y, 'tower');
+  this.sprite = game.add.sprite(x, y, 'tower');
 }
 Tower.prototype = {
-    fire: function() {
+    fire: function(_tower) {
       console.log("pew  pew");
     }
 }
