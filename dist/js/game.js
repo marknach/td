@@ -15,7 +15,17 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":2,"./states/gameover":3,"./states/menu":4,"./states/play":5,"./states/preload":6}],2:[function(require,module,exports){
+
+},{"./states/boot":3,"./states/gameover":4,"./states/menu":5,"./states/play":6,"./states/preload":7}],2:[function(require,module,exports){
+function Tower(game, x, y) {
+  return game.add.sprite(x, y, 'tower');
+}
+Tower.prototype = {
+    shoot: function() {
+    }
+}
+
+},{}],3:[function(require,module,exports){
 
 'use strict';
 
@@ -34,7 +44,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -62,7 +72,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -87,22 +97,24 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
   'use strict';
   function Play() {}
   Play.prototype = {
     create: function() {
+      this.lastFire = 0;
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
+      this.tower = new Tower(this.game, 500, 300);
       this.spawnLevel();
     },
     update: function() {
-
+       fire();
     },
     walkPath: function(obj) {
-      this.tween = this.game.add.tween(this.unit).to({x: 695}, 5000)
-                                                 .to({y: 100}, 5000)
+      this.tween = this.game.add.tween(this.unit).to({x: 695}, 6000)
+                                                 .to({y: 100}, 3000)
                                                  .start();
     },
     spawnLevel: function(unit) {
@@ -113,12 +125,17 @@ module.exports = Menu;
       this.unit = this.game.add.sprite(0, 435, 'unit');
       this.units.add(this.unit);
       this.walkPath(this.unit);
+    },
+    fire: function() {
+      this.towers.forEachAlive(function(tower){
+        tower.fire();
+      });
     }
   };
   
   module.exports = Play;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -135,6 +152,7 @@ Preload.prototype = {
     this.load.setPreloadSprite(this.asset);
     this.load.image('map', 'assets/map.png');
     this.load.image('unit', 'assets/unit1.png');
+    this.load.image('tower', 'assets/tower1.png');
 
   },
   create: function() {
@@ -152,4 +170,4 @@ Preload.prototype = {
 
 module.exports = Preload;
 
-},{}]},{},[1])
+},{}]},{},[1,2])
