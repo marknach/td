@@ -15,17 +15,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-
-},{"./states/boot":3,"./states/gameover":4,"./states/menu":5,"./states/play":6,"./states/preload":7}],2:[function(require,module,exports){
-function Tower(game, x, y) {
-  return game.add.sprite(x, y, 'tower');
-}
-Tower.prototype = {
-    shoot: function() {
-    }
-}
-
-},{}],3:[function(require,module,exports){
+},{"./states/boot":2,"./states/gameover":3,"./states/menu":4,"./states/play":5,"./states/preload":6}],2:[function(require,module,exports){
 
 'use strict';
 
@@ -44,7 +34,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -72,7 +62,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -97,7 +87,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
   'use strict';
   function Play() {}
@@ -106,11 +96,12 @@ module.exports = Menu;
       this.lastFire = 0;
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
-      this.tower = new Tower(this.game, 500, 300);
+      this.towers = this.game.add.group();
+      this.towers.add(new Tower(this.game, 500, 300));
       this.spawnLevel();
     },
     update: function() {
-       fire();
+       this.fire();
     },
     walkPath: function(obj) {
       this.tween = this.game.add.tween(this.unit).to({x: 695}, 6000)
@@ -135,7 +126,7 @@ module.exports = Menu;
   
   module.exports = Play;
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -153,6 +144,7 @@ Preload.prototype = {
     this.load.image('map', 'assets/map.png');
     this.load.image('unit', 'assets/unit1.png');
     this.load.image('tower', 'assets/tower1.png');
+    this.load.image('bullet', 'assets/bullet.png');
 
   },
   create: function() {
@@ -170,4 +162,4 @@ Preload.prototype = {
 
 module.exports = Preload;
 
-},{}]},{},[1,2])
+},{}]},{},[1])
