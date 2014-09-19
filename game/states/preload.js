@@ -15,6 +15,7 @@ Preload.prototype = {
     this.load.image('map', 'assets/map.png');
     this.load.image('unit', 'assets/unit1.png');
     this.load.image('tower', 'assets/tower1.png');
+    this.load.image('bullet', 'assets/bullet1.png');
 
   },
   create: function() {
