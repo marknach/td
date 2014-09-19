@@ -97,7 +97,7 @@ module.exports = Menu;
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
       this.towers = this.game.add.group();
-      this.towers.add(new Tower(this.game, 500, 300));
+      this.towers.add( new Tower(this.game, 500, 300));
       this.spawnLevel();
     },
     update: function() {
@@ -119,7 +119,7 @@ module.exports = Menu;
     },
     fire: function() {
       this.towers.forEachAlive(function(tower){
-        tower.fire();
+        Tower.prototype.fire(tower);
       });
     }
   };
