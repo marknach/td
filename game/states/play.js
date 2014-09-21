@@ -3,15 +3,29 @@
   function Play() {}
   Play.prototype = {
     create: function() {
+      this.game.physics.startSystem(Phaser.Physics.ARCADE);
       this.player = new Player();
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
+      this.castle = this.game.add.sprite(660, 60, 'castle');
+      this.castle.physicsBodyType  = Phaser.Physics.ARCADE; 
+      this.game.physics.enable(this.castle, Phaser.Physics.ARCADE);
+
+      this.enemies = this.game.add.group();
+      this.enemies.enableBody = true;
+      this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
+      this.spawnLevel();
+      this.enemies.setAll('anchor.x', 0.5);
+      this.enemies.setAll('anchor.y', 0.5);
+
       this.towers = this.game.add.group();
       this.player.addTower(new Tower(this.game, 500, 300));
-      this.spawnLevel();
+      this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
+
     },
     update: function() {
        this.fire();
+       this.game.physics.arcade.overlap(this.castle, this.enemies, this.enemyReachedCastle, null, this);
     },
     walkPath: function(obj) {
       this.tween = this.game.add.tween(this.unit).to({x: 695}, 6000)
@@ -19,18 +33,22 @@
                                                  .start();
     },
     spawnLevel: function(unit) {
-      this.units = this.game.add.group();
       this.game.time.events.repeat(Phaser.Timer.SECOND / 2, 10, this.spawnUnit, this);
     },
     spawnUnit: function() {
       this.unit = this.game.add.sprite(0, 435, 'unit');
-      this.units.add(this.unit);
+      this.enemies.add(this.unit);
       this.walkPath(this.unit);
     },
     fire: function() {
       this.towers.forEachAlive(function(tower){
         Tower.prototype.fire(tower);
       });
+    },
+    enemyReachedCastle: function(_castle, _enemy) {
+      this.player.lives -= 1;
+      this.livesText.text = 'lives: ' + this.player.lives;
+      _enemy.kill();
     }
   };
   

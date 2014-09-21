@@ -79,57 +79,6 @@
        height="600"
        x="1"
        y="452.36218" />
-    <g
-       id="g3078"
-       transform="translate(10,-350)">
-      <rect
-         y="842.36218"
-         x="650"
-         height="20"
-         width="40"
-         id="rect3055"
-         style="fill:#666666" />
-      <rect
-         y="842.36218"
-         x="720"
-         height="20"
-         width="40"
-         id="rect3059"
-         style="fill:#666666" />
-      <g
-         transform="translate(0,-2.6171874e-6)"
-         id="g3072">
-        <rect
-           style="fill:#666666"
-           id="rect3053"
-           width="110"
-           height="70"
-           x="650"
-           y="410"
-           transform="translate(0,452.36218)" />
-        <rect
-           style="fill:#502d16"
-           id="rect3066"
-           width="30"
-           height="40.000004"
-           x="690"
-           y="892.36218" />
-        <rect
-           style="fill:#4d4d4d"
-           id="rect3068"
-           width="20"
-           height="20"
-           x="660"
-           y="852.36218" />
-        <rect
-           style="fill:#4d4d4d"
-           id="rect3070"
-           width="20"
-           height="20"
-           x="730"
-           y="852.36218" />
-      </g>
-    </g>
   </g>
   <g
      inkscape:groupmode="layer"

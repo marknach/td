@@ -13,6 +13,7 @@ Preload.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
     this.load.image('map', 'assets/map.png');
+    this.load.image('castle', 'assets/castle.png');
     this.load.image('unit', 'assets/unit1.png');
     this.load.image('tower', 'assets/tower1.png');
     this.load.image('bullet', 'assets/bullet.png');
