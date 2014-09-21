@@ -108,7 +108,6 @@ module.exports = Menu;
       this.enemies.setAll('anchor.x', 0.5);
       this.enemies.setAll('anchor.y', 0.5);
 
-      this.towers = this.game.add.group();
       this.player.addTower(new Tower(this.game, 500, 300));
       this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
@@ -131,7 +130,7 @@ module.exports = Menu;
       this.walkPath(this.unit);
     },
     fire: function() {
-      this.towers.forEachAlive(function(tower){
+      this.player.getTowers().forEach(function(tower){
         Tower.prototype.fire(tower);
       });
     },
