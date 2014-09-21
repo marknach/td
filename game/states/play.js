@@ -49,6 +49,8 @@
       this.player.lives -= 1;
       this.livesText.text = 'lives: ' + this.player.lives;
       _enemy.kill();
+      if ( this.player.lives === 0 )
+          this.game.state.start('gameover');
     }
   };
   
