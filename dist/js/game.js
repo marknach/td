@@ -111,7 +111,6 @@ module.exports = Menu;
       this.bullets = this.game.add.group();
       this.bullets.enableBody = true;
       this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-      this.bullets.createMultiple(30, 'bullet');
       this.bullets.setAll('anchor.x', 0.5);
       this.bullets.setAll('anchor.y', 1);
       this.bullets.setAll('outOfBoundsKill', true);
