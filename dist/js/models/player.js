@@ -7,8 +7,8 @@ Player.prototype = {
   getTowers: function() {
       return this.towers;
   },
-  addTower: function(tower) {
-      this.towers.push(tower);
+  buildTower: function(game, x, y) {
+      this.towers.push(new Tower(game, x, y));
   },
 
 

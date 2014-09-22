@@ -74,7 +74,7 @@ Menu.prototype = {
   create: function() {
     var style = { font: '65px Arial', fill: '#ffffff', align: 'center'};
 
-    this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play "Click The Yeoman Logo"', { font: '16px Arial', fill: '#ffffff', align: 'center'});
+    this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play', { font: '16px Arial', fill: '#ffffff', align: 'center'});
     this.instructionsText.anchor.setTo(0.5, 0.5);
 
   },
@@ -116,7 +116,13 @@ module.exports = Menu;
       this.bullets.setAll('outOfBoundsKill', true);
       this.bullets.setAll('checkWorldBounds', true);
 
-      this.player.addTower(new Tower(this.game, 500, 300));
+      this.player.buildTower(this.game, 500, 300);
+      this.towerPanel = this.game.add.sprite(200, 555, 'tower');
+      this.towerPanel.inputEnabled = true;
+      this.towerPanel.input.useHandCursor = true;
+      this.towerPanel.input.enableDrag();
+      this.towerPanel.events.onInputOver.add(this.buildingTower, this);
+
       this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     },
@@ -153,6 +159,9 @@ module.exports = Menu;
     bulletHitsEnemy: function(_bullet, _enemy) {
       _bullet.kill();
       _enemy.kill();
+    },
+    buildingTower: function(event, tower) {
+      console.log(event);
     }
   };
   

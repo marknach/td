@@ -26,7 +26,13 @@
       this.bullets.setAll('outOfBoundsKill', true);
       this.bullets.setAll('checkWorldBounds', true);
 
-      this.player.addTower(new Tower(this.game, 500, 300));
+      this.player.buildTower(this.game, 500, 300);
+      this.towerPanel = this.game.add.sprite(200, 555, 'tower');
+      this.towerPanel.inputEnabled = true;
+      this.towerPanel.input.useHandCursor = true;
+      this.towerPanel.input.enableDrag();
+      this.towerPanel.events.onInputOver.add(this.buildingTower, this);
+
       this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     },
@@ -63,6 +69,9 @@
     bulletHitsEnemy: function(_bullet, _enemy) {
       _bullet.kill();
       _enemy.kill();
+    },
+    buildingTower: function(event, tower) {
+      console.log(event);
     }
   };
   
