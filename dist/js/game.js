@@ -125,6 +125,7 @@ module.exports = Menu;
       this.towerPanel.events.onDragStop.add(this.stopDrag, this);
 
       this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
+      this.goldText = this.game.add.text(680, 500, 'gold: 100', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     },
     update: function() {
@@ -163,11 +164,16 @@ module.exports = Menu;
       _bullet.kill();
       if (_enemy.hits <= 0) {
         _enemy.kill();
+        this.player.addGold(15);
+        this.updateGoldText();
       }
     },
     stopDrag: function(sprite, pointer) {
       this.player.buildTower(this.game, sprite.x, sprite.y);
       this.towerPanel.position = {x: 200, y: 555};
+    },
+    updateGoldText: function() {
+      this.goldText.text = 'gold: ' + this.player.gold; 
     }
   };
   
