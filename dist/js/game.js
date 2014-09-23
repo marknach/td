@@ -121,14 +121,15 @@ module.exports = Menu;
       this.towerPanel.inputEnabled = true;
       this.towerPanel.input.useHandCursor = true;
       this.towerPanel.input.enableDrag();
-      this.towerPanel.events.onInputOver.add(this.buildingTower, this);
+      //this.towerPanel.events.onDragStart(this.startDrag, this);
+      this.towerPanel.events.onDragStop.add(this.stopDrag, this);
 
       this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     },
     update: function() {
        this.fire();
-       this.game.physics.arcade.collide(this.bullets, this.enemies, this.bulletHitsEnemy, null, this);
+       this.game.physics.arcade.overlap(this.bullets, this.enemies, this.bulletHitsEnemy, null, this);
        this.game.physics.arcade.overlap(this.castle, this.enemies, this.enemyReachedCastle, null, this);
     },
     walkPath: function(obj) {
@@ -141,6 +142,7 @@ module.exports = Menu;
     },
     spawnUnit: function() {
       this.unit = this.game.add.sprite(0, 435, 'unit');
+      this.unit.hits = 5;
       this.enemies.add(this.unit);
       this.walkPath(this.unit);
     },
@@ -157,11 +159,15 @@ module.exports = Menu;
           this.game.state.start('gameover');
     },
     bulletHitsEnemy: function(_bullet, _enemy) {
+      _enemy.hits -= 1;
       _bullet.kill();
-      _enemy.kill();
+      if (_enemy.hits <= 0) {
+        _enemy.kill();
+      }
     },
-    buildingTower: function(event, tower) {
-      console.log(event);
+    stopDrag: function(sprite, pointer) {
+      this.player.buildTower(this.game, sprite.x, sprite.y);
+      this.towerPanel.position = {x: 200, y: 555};
     }
   };
   
