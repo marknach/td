@@ -80,6 +80,8 @@
     },
     stopDrag: function(sprite, pointer) {
       this.player.buildTower(this.game, sprite.x, sprite.y);
+      this.player.gold -= 100;
+      this.updateGoldText();
       this.towerPanel.position = {x: 200, y: 555};
     },
     updateGoldText: function() {
