@@ -14,7 +14,6 @@
       this.enemies = this.game.add.group();
       this.enemies.enableBody = true;
       this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
-      this.spawnLevel();
       this.enemies.setAll('anchor.x', 0.5);
       this.enemies.setAll('anchor.y', 0.5);
 
@@ -34,8 +33,11 @@
       //this.towerPanel.events.onDragStart(this.startDrag, this);
       this.towerPanel.events.onDragStop.add(this.stopDrag, this);
 
-      this.livesText = this.game.add.text(680, 550, 'lives: 20', { font: "20px Arial", fill: "#ffffff", align: "left" });
-      this.goldText = this.game.add.text(680, 500, 'gold: 100', { font: "20px Arial", fill: "#ffffff", align: "left" });
+      this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
+      this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
+      this.timeText = this.game.add.text(400, 10, '15', { font: "20px Arial", fill: "#ffffff", align: "left" });
+      this.game.time.events.repeat(Phaser.Timer.SECOND, 15, this.updateTime, this);
+      this.game.time.events.repeat(Phaser.Timer.SECOND * 15, 10, this.spawnLevel, this);
 
     },
     update: function() {
@@ -48,12 +50,15 @@
                                                  .to({y: 100}, 3000)
                                                  .start();
     },
-    spawnLevel: function(unit) {
+    updateTime: function() {
+        this.timeText.text = parseInt(this.timeText.text) - 1;
+    },
+    spawnLevel: function() {
       this.game.time.events.repeat(Phaser.Timer.SECOND / 2, 10, this.spawnUnit, this);
     },
     spawnUnit: function() {
       this.unit = this.game.add.sprite(0, 435, 'unit');
-      this.unit.hits = 5;
+      this.unit.hits = 3;
       this.enemies.add(this.unit);
       this.walkPath(this.unit);
     },
@@ -79,9 +84,11 @@
       }
     },
     stopDrag: function(sprite, pointer) {
-      this.player.buildTower(this.game, sprite.x, sprite.y);
-      this.player.gold -= 100;
-      this.updateGoldText();
+      if ( this.player.gold >= 100 ) {
+        this.player.buildTower(this.game, sprite.x, sprite.y);
+        this.player.gold -= 100;
+        this.updateGoldText();
+      }
       this.towerPanel.position = {x: 200, y: 555};
     },
     updateGoldText: function() {
