@@ -120,8 +120,8 @@ module.exports = Menu;
       this.towerPanel.inputEnabled = true;
       this.towerPanel.input.useHandCursor = true;
       this.towerPanel.input.enableDrag();
-      //this.towerPanel.events.onDragStart(this.startDrag, this);
       this.towerPanel.events.onDragStop.add(this.stopDrag, this);
+      this.towerPanelText = this.game.add.text(150, 570, '$100', { font: "20px Arial", fill: "#000000", align: "left" });
 
       this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
       this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
