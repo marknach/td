@@ -35,9 +35,8 @@
 
       this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
       this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
-      this.timeText = this.game.add.text(400, 10, '15', { font: "20px Arial", fill: "#ffffff", align: "left" });
-      this.game.time.events.repeat(Phaser.Timer.SECOND, 15, this.updateTime, this);
-      this.game.time.events.repeat(Phaser.Timer.SECOND * 15, 10, this.spawnLevel, this);
+      this.timeText = this.game.add.text(400, 10, '5', { font: "36px Arial", fill: "#ffffff", align: "left" });
+      this.game.time.events.loop(Phaser.Timer.SECOND, this.updateTime, this);
 
     },
     update: function() {
@@ -51,7 +50,13 @@
                                                  .start();
     },
     updateTime: function() {
-        this.timeText.text = parseInt(this.timeText.text) - 1;
+        var curTime = parseInt(this.timeText.text);
+        if (curTime == 1) { 
+            this.spawnLevel();
+            curTime = 16;
+        }
+        this.timeText.text = curTime - 1;
+
     },
     spawnLevel: function() {
       this.game.time.events.repeat(Phaser.Timer.SECOND / 2, 10, this.spawnUnit, this);
