@@ -116,12 +116,12 @@ module.exports = Menu;
       this.bullets.setAll('checkWorldBounds', true);
 
       this.player.buildTower(this.game, 500, 300);
-      this.towerPanel = this.game.add.sprite(200, 555, 'tower');
+      this.towerPanel = this.game.add.sprite(203, 525, 'tower');
       this.towerPanel.inputEnabled = true;
       this.towerPanel.input.useHandCursor = true;
       this.towerPanel.input.enableDrag();
       this.towerPanel.events.onDragStop.add(this.stopDrag, this);
-      this.towerPanelText = this.game.add.text(150, 570, '$100', { font: "20px Arial", fill: "#000000", align: "left" });
+      this.towerPanelText = this.game.add.text(200, 570, '$100', { font: "20px Arial", fill: "#000000", align: "left" });
 
       this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
       this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
@@ -153,7 +153,7 @@ module.exports = Menu;
     },
     spawnUnit: function() {
       this.unit = this.game.add.sprite(0, 435, 'unit');
-      this.unit.hits = 3;
+      this.unit.hits = 2;
       this.enemies.add(this.unit);
       this.walkPath(this.unit);
     },
@@ -184,7 +184,7 @@ module.exports = Menu;
         this.player.gold -= 100;
         this.updateGoldText();
       }
-      this.towerPanel.position = {x: 200, y: 555};
+      this.towerPanel.position = {x: 203, y: 525};
     },
     updateGoldText: function() {
       this.goldText.text = 'gold: ' + this.player.gold; 
