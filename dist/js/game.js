@@ -145,7 +145,7 @@ module.exports = Menu;
 
     },
     spawnLevel: function() {
-      this.game.time.events.repeat(Phaser.Timer.SECOND / 2, 10, this.spawnUnit, this);
+      this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 10, this.spawnUnit, this);
     },
     spawnUnit: function() {
       this.unit = this.game.add.sprite(0, 435, 'unit');
