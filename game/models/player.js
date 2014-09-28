@@ -8,8 +8,8 @@ Player.prototype = {
   getTowers: function() {
       return this.towers;
   },
-  buildTower: function(game, x, y) {
-      this.towers.push(new Tower(game, x, y));
+  buildTower: function(game, sprite) {
+      this.towers.push(new Tower(game, sprite));
   },
   addGold: function(amount) {
     this.gold += amount;

@@ -1,5 +1,5 @@
-function Tower(game, x, y) {
-  this.sprite = game.add.sprite(x, y, 'tower');
+function Tower(game, sprite) {
+  this.sprite = game.add.sprite(sprite.x, sprite.y, sprite.key);
   this.game = game;
   this.lastFired = game.time.now;
   this.range = 300;

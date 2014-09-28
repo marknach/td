@@ -16,6 +16,7 @@ Preload.prototype = {
     this.load.image('castle', 'assets/castle.png');
     this.load.image('unit', 'assets/unit1.png');
     this.load.image('tower', 'assets/tower1.png');
+    this.load.image('cannonTower', 'assets/tower2.png');
     this.load.image('bullet', 'assets/bullet.png');
     this.load.audio('music', 'assets/td_music.mp3');
 

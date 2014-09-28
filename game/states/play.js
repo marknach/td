@@ -25,13 +25,8 @@
       this.bullets.setAll('outOfBoundsKill', true);
       this.bullets.setAll('checkWorldBounds', true);
 
-      this.player.buildTower(this.game, 500, 300);
-      this.towerPanel = this.game.add.sprite(203, 525, 'tower');
-      this.towerPanel.inputEnabled = true;
-      this.towerPanel.input.useHandCursor = true;
-      this.towerPanel.input.enableDrag();
-      this.towerPanel.events.onDragStop.add(this.stopDrag, this);
-      this.towerPanelText = this.game.add.text(200, 570, '$100', { font: "20px Arial", fill: "#000000", align: "left" });
+      this.initTowerBuildingPanel();
+      this.player.buildTower(this.game, {x: 500, y: 300, key: 'tower'});
 
       this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
       this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
@@ -90,14 +85,32 @@
     },
     stopDrag: function(sprite, pointer) {
       if ( this.player.gold >= 100 ) {
-        this.player.buildTower(this.game, sprite.x, sprite.y);
+        this.player.buildTower(this.game, sprite);
         this.player.gold -= 100;
         this.updateGoldText();
       }
       this.towerPanel.position = {x: 203, y: 525};
+      this.cannonTowerPanel.position = {x: 253, y: 525};
     },
     updateGoldText: function() {
       this.goldText.text = 'gold: ' + this.player.gold; 
+    },
+    initTowerBuildingPanel: function() {
+      this.towerPanel = this.game.add.sprite(203, 525, 'tower');
+      this.towerPanel.inputEnabled = true;
+      this.towerPanel.input.useHandCursor = true;
+      this.towerPanel.input.enableDrag();
+      this.towerPanel.events.onDragStop.add(this.stopDrag, this);
+      this.towerPanelText = this.game.add.text(200, 570, '$100', { font: "20px Arial", fill: "#000000", align: "left" });
+
+      this.cannonTowerPanel = this.game.add.sprite(253, 525, 'cannonTower');
+      this.cannonTowerPanel.inputEnabled = true;
+      this.cannonTowerPanel.input.useHandCursor = true;
+      this.cannonTowerPanel.input.enableDrag();
+      this.cannonTowerPanel.events.onDragStop.add(this.stopDrag, this);
+      this.cannonTowerPanelText = this.game.add.text(250, 570, '$150', { font: "20px Arial", fill: "#000000", align: "left" });
+
+
     }
   };
   
