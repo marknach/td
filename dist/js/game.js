@@ -91,11 +91,11 @@ module.exports = Menu;
 },{}],5:[function(require,module,exports){
 
   'use strict';
-  function Play() {}
+	function Play() {}
   Play.prototype = {
     create: function() {
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
-      this.player = new Player();
+			this.player = new Player();
       this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
       this.castle = this.game.add.sprite(660, 60, 'castle');
@@ -200,8 +200,6 @@ module.exports = Menu;
       this.cannonTowerPanel.input.enableDrag();
       this.cannonTowerPanel.events.onDragStop.add(this.stopDrag, this);
       this.cannonTowerPanelText = this.game.add.text(250, 570, '$150', { font: "20px Arial", fill: "#000000", align: "left" });
-
-
     }
   };
   
