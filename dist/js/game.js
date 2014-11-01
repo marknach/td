@@ -72,12 +72,9 @@ Menu.prototype = {
 
   },
   create: function() {
-    var style = { font: '65px Arial', fill: '#ffffff', align: 'center'};
-    this.music = this.game.add.audio('music');
-    this.music.play();
-    this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play', { font: '16px Arial', fill: '#ffffff', align: 'center'});
-    this.instructionsText.anchor.setTo(0.5, 0.5);
-
+    //this.music = this.game.add.audio('music');
+    //this.music.play();
+		this.game.add.sprite(0, 0, "menu");
   },
   update: function() {
     if(this.game.input.activePointer.justPressed()) {
@@ -221,6 +218,7 @@ Preload.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
     this.load.image('map', 'assets/map.png');
+    this.load.image('menu', 'assets/menu.png');
     this.load.image('castle', 'assets/castle.png');
     this.load.image('unit', 'assets/unit1.png');
     this.load.image('tower', 'assets/tower1.png');
