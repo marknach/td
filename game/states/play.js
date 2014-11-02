@@ -3,20 +3,26 @@
 	function Play() {}
   Play.prototype = {
     create: function() {
+			//Setup basic game objects / configs
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
-			this.player = new Player();
-      this.game.stage.backgroundColor = '#FFF';
       this.sprite = this.game.add.sprite(0, 0, 'map');
+      this.game.stage.backgroundColor = '#FFF';
       this.castle = this.game.add.sprite(660, 60, 'castle');
       this.castle.physicsBodyType  = Phaser.Physics.ARCADE; 
       this.game.physics.enable(this.castle, Phaser.Physics.ARCADE);
 
+			this.player = new Player();
+      this.initTowerBuildingPanel();
+      this.player.buildTower(this.game, {x: 500, y: 300, key: 'tower'});
+
+			//Setup Enemies Group
       this.enemies = this.game.add.group();
       this.enemies.enableBody = true;
       this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
       this.enemies.setAll('anchor.x', 0.5);
       this.enemies.setAll('anchor.y', 0.5);
 
+			//Setup Bullets Group
       this.bullets = this.game.add.group();
       this.bullets.enableBody = true;
       this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -24,9 +30,6 @@
       this.bullets.setAll('anchor.y', 1);
       this.bullets.setAll('outOfBoundsKill', true);
       this.bullets.setAll('checkWorldBounds', true);
-
-      this.initTowerBuildingPanel();
-      this.player.buildTower(this.game, {x: 500, y: 300, key: 'tower'});
 
       this.livesText = this.game.add.text(680, 580, 'lives: 20', { font: "20px Arial", fill: "#000000", align: "left" });
       this.goldText = this.game.add.text(680, 550, 'gold: 100', { font: "20px Arial", fill: "#000000", align: "left" });
@@ -41,6 +44,7 @@
     },
     walkPath: function(obj) {
       this.tween = this.game.add.tween(this.unit).to({x: 695}, 6000)
+																								 .to({angle: -90}, 500, Phaser.Easing.Linear.None, true, 0, false)
                                                  .to({y: 100}, 3000)
                                                  .start();
     },
