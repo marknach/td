@@ -1,4 +1,6 @@
 //place to put info about game
+var Tower = require('./tower.js');
+
 function Player() {
   this.towers = [];
   this.lives = 20;
@@ -15,6 +17,6 @@ Player.prototype = {
     this.gold += amount;
     return this.gold;
   },
+};
 
-
-}
+module.exports = Player;

@@ -28,7 +28,7 @@ Tower.prototype = {
         var distSoFar = obj.x + (435 - obj.y)
         var newDist = distSoFar + 30;
         return {x: Math.min(newDist, 695) , y: 435 - Math.max(distSoFar - 695, 0)}
-
     }
+};
 
-}
+module.exports = Tower;

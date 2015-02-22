@@ -15,7 +15,67 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":2,"./states/gameover":3,"./states/menu":4,"./states/play":5,"./states/preload":6}],2:[function(require,module,exports){
+},{"./states/boot":4,"./states/gameover":5,"./states/menu":6,"./states/play":7,"./states/preload":8}],2:[function(require,module,exports){
+//place to put info about game
+var Tower = require('./tower.js');
+
+function Player() {
+  this.towers = [];
+  this.lives = 20;
+  this.gold = 100;
+}
+Player.prototype = {
+  getTowers: function() {
+      return this.towers;
+  },
+  buildTower: function(game, sprite) {
+      this.towers.push(new Tower(game, sprite));
+  },
+  addGold: function(amount) {
+    this.gold += amount;
+    return this.gold;
+  },
+};
+
+module.exports = Player;
+
+},{"./tower.js":3}],3:[function(require,module,exports){
+function Tower(game, sprite) {
+  this.sprite = game.add.sprite(sprite.x, sprite.y, sprite.key);
+  this.game = game;
+  this.lastFired = game.time.now;
+  this.range = 300;
+  this.fireRate = 1000;
+}
+
+Tower.prototype = {
+    fire: function(_tower) {
+      var enemy = _tower.game.state.states['play'].enemies.getFirstAlive();
+      if ( enemy && _tower.game.time.now - _tower.lastFired  >= _tower.fireRate ) {
+        var bullet = _tower.game.add.sprite(_tower.sprite.position.x, _tower.sprite.position.y, 'bullet');
+        _tower.game.physics.enable(bullet, Phaser.Physics.ARCADE);
+        _tower.game.physics.arcade.moveToObject(bullet, this.whereDoIShoot(enemy), 1000);
+        _tower.game.state.states['play'].bullets.add(bullet);
+        _tower.lastFired = _tower.game.time.now;
+      }
+    },
+    getFirstInRange: function(_tower) {
+      var enemies = _tower.game.state.states['play'].enemies;
+      return this.iterate('alive', true, Phaser.Group.RETURN_CHILD);
+    },
+    whereDoIShoot: function(obj) {
+        //Path goes from (0, 435) to (695, 435), to (695,100)
+        //Thats a total walking distance of 695 + 335 = 1030 
+        //For now, let's guess ahead 30 units
+        var distSoFar = obj.x + (435 - obj.y)
+        var newDist = distSoFar + 30;
+        return {x: Math.min(newDist, 695) , y: 435 - Math.max(distSoFar - 695, 0)}
+    }
+};
+
+module.exports = Tower;
+
+},{}],4:[function(require,module,exports){
 
 'use strict';
 
@@ -34,7 +94,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -62,7 +122,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -85,8 +145,10 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],5:[function(require,module,exports){
-
+},{}],7:[function(require,module,exports){
+var Player = require('../models/player.js'),
+    Tower = require('../models/tower.js');
+    
   'use strict';
 	function Play() {}
   Play.prototype = {
@@ -206,7 +268,7 @@ module.exports = Menu;
   
   module.exports = Play;
 
-},{}],6:[function(require,module,exports){
+},{"../models/player.js":2,"../models/tower.js":3}],8:[function(require,module,exports){
 
 'use strict';
 function Preload() {

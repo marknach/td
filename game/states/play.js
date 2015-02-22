@@ -1,4 +1,6 @@
-
+var Player = require('../models/player.js'),
+    Tower = require('../models/tower.js');
+    
   'use strict';
 	function Play() {}
   Play.prototype = {
