@@ -5,7 +5,8 @@ function Player() {
   this.towers = [];
   this.lives = 20;
   this.gold = 100;
-}
+};
+
 Player.prototype = {
   getTowers: function() {
       return this.towers;
