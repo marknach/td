@@ -7,6 +7,7 @@ var Player = require('../models/player.js'),
     create: function() {
 			//Setup basic game objects / configs
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
+      this.game.input.useHandCursor = false;
       this.sprite = this.game.add.sprite(0, 0, 'map');
       this.game.stage.backgroundColor = '#FFF';
       this.castle = this.game.add.sprite(660, 60, 'castle');
@@ -70,7 +71,7 @@ var Player = require('../models/player.js'),
     },
     fire: function() {
       this.player.getTowers().forEach(function(tower){
-        Tower.prototype.fire(tower);
+        tower.fire();
       });
     },
     enemyReachedCastle: function(_castle, _enemy) {
