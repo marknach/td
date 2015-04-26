@@ -32,6 +32,7 @@ Tower.prototype = {
         //For now, let's guess ahead 30 units
         var distSoFar = obj.x + (435 - obj.y),
             newDist = distSoFar + 30;
+
         return {
             x: Math.min(newDist, 695),
             y: 435 - Math.max(distSoFar - 695, 0)

@@ -65,7 +65,7 @@ Play.prototype = {
     },
 
     walkPath: function(obj) {
-        this.tween = this.game.add.tween(this.unit).to({
+        this.game.add.tween(this.unit).to({
             x: 695
         }, 6000)
             .to({
