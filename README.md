@@ -5,9 +5,12 @@ Basic tower defence game - currently just building out a first level w/ a static
 
 To Run:
 
-``` git clone git@github.com:marknach/td.git
+``` 
+git clone git@github.com:marknach/td.git
 cd td
 npm install
- bower install
-grunt ```
+bower install
+grunt 
+```
+
 profit
